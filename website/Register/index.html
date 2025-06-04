@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrieren</title>
+    <title>Register</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -75,25 +75,25 @@
             outline: none;
         }
         .register-btn {
-    width: 100%;
-    padding: 0.9rem;
-    background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    transition: background 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
-    box-shadow: 0 2px 8px 0 rgba(79,140,255,0.08);
-    position: relative;
-    overflow: hidden;
-}
-.register-btn:hover {
-    background: linear-gradient(270deg, #38e8ff 0%, #4f8cff 100%);
-    box-shadow: 0 4px 16px 0 rgba(56,232,255,0.15);
-}
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+            box-shadow: 0 2px 8px 0 rgba(79,140,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .register-btn:hover {
+            background: linear-gradient(270deg, #38e8ff 0%, #4f8cff 100%);
+            box-shadow: 0 4px 16px 0 rgba(56,232,255,0.15);
+        }
         .login-link {
             display: block;
             text-align: center;
@@ -116,23 +116,23 @@
 <body>
     <div class="left">
         <form class="register-box">
-            <h2>Registrieren</h2>
-            <p>Erstelle deinen Account, um loszulegen!</p>
+            <h2>Register</h2>
+            <p>Create your account to get started!</p>
             <div class="form-group">
                 <label for="email">E-Mail</label>
                 <input type="email" id="email" name="email" placeholder="Enter your E-Mail" required>
             </div>
             <div class="form-group">
-                <label for="username">Benutzername</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
-                <label for="password">Passwort</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit" class="register-btn">Registrieren</button>
+            <button type="submit" class="register-btn">Register</button>
             <div class="login-link">
-                Schon registriert? <a href="/login"><span>Jetzt einloggen</span></a>
+                Already have an account? <a href="/login"><span>Log in now</span></a>
             </div>
         </form>
     </div>
