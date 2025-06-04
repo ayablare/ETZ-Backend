@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrieren</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+        }
+        .left {
+            background: #111215;
+            color: #fff;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 350px;
+        }
+        .right {
+            flex: 1;
+            min-width: 350px;
+            background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80') center center/cover no-repeat;
+        }
+        .register-box {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(20,22,28,0.97);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .register-box h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+        }
+        .register-box p {
+            text-align: center;
+            color: #b0b8c1;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        label {
+            color: #b0b8c1;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        input[type="email"],
+        input[type="text"],
+        input[type="password"] {
+            background: #181a20;
+            border: 1px solid #23242a;
+            border-radius: 0.5rem;
+            color: #fff;
+            font-size: 1rem;
+            padding: 0.8rem 1rem;
+            transition: border 0.2s;
+        }
+        input:focus {
+            border-color: #4f8cff;
+            outline: none;
+        }
+        .register-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+    box-shadow: 0 2px 8px 0 rgba(79,140,255,0.08);
+    position: relative;
+    overflow: hidden;
+}
+.register-btn:hover {
+    background: linear-gradient(270deg, #38e8ff 0%, #4f8cff 100%);
+    box-shadow: 0 4px 16px 0 rgba(56,232,255,0.15);
+}
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #b0b8c1;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .login-link span {
+            color: #4f8cff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .right { display: none; }
+            .left { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="left">
+        <form class="register-box">
+            <h2>Registrieren</h2>
+            <p>Erstelle deinen Account, um loszulegen!</p>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" placeholder="Enter your E-Mail" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="register-btn">Registrieren</button>
+            <div class="login-link">
+                Schon registriert? <a href="/login"><span>Jetzt einloggen</span></a>
+            </div>
+        </form>
+    </div>
+    <div class="right"></div>
+</body>
+</html>
