@@ -3,9 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ETZ Backend Item Shop</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('https://imgs.search.brave.com/tPFE6dQleVZ00BxY4moqvZgDjKBInVnqeLhm23xzkYE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMzIz/Mjk3LmpwZw');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .center-container {
+            display: flex;
+            gap: 60px;
+            padding: 40px 60px;
+            border-radius: 16px;
+            box-shadow: none;
+            margin-top: 60px;
+        }
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section h2 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 20px 0;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .cosmetic-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            min-width: 260px;
+        }
+        .cosmetic-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            background: #222;
+            object-fit: contain;
+        }
+        .cosmetic-name {
+            font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 1px 1px 4px #000;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Item Shop will be displayed here!</h1>
+    <div class="center-container">
+        <div class="section">
+            <h2>Featured</h2>
+            <div id="featured"></div>
+        </div>
+        <div class="section">
+            <h2>Daily</h2>
+            <div id="daily"></div>
+        </div>
+    </div>
+    <script>
+        // Farben für Fortnite-Raritäten
+        const rarityColors = {
+            common: "#B9B9B9",
+            uncommon: "#4CAF50",
+            rare: "#2196F3",
+            epic: "#9C27B0",
+            legendary: "#FF9800",
+            mythic: "#FFD700",
+            exotic: "#00FFFF"
+        };
+
+        fetch('../../Config/catalog_config.json')
+            .then(res => res.json())
+            .then(async data => {
+                const featured = [];
+                const daily = [];
+                for (const key in data) {
+                    if (key.toLowerCase().startsWith("featured") || key.toLowerCase().startsWith("daily")) {
+                        const grant = data[key].itemGrants?.[0];
+                        if (grant) {
+                            const id = grant.split(":")[1];
+                            if (key.toLowerCase().startsWith("featured")) featured.push(id);
+                            if (key.toLowerCase().startsWith("daily")) daily.push(id);
+                        }
+                    }
+                }
+
+                // Holt Infos von der Fortnite API anhand der Cosmetic-ID
+                async function getCosmeticInfo(id) {
+                    const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${encodeURIComponent(id)}`);
+                    const json = await response.json();
+                    if (json.status === 200 && json.data) {
+                        return {
+                            name: json.data.name,
+                            rarity: json.data.rarity.value,
+                            image: json.data.images.icon
+                        };
+                    }
+                    return null;
+                }
+
+                // Zeigt Cosmetics an
+                async function renderCosmetics(list, containerId) {
+                    const container = document.getElementById(containerId);
+                    for (const id of list) {
+                        const info = await getCosmeticInfo(id);
+                        if (info) {
+                            const box = document.createElement('div');
+                            box.className = 'cosmetic-box';
+                            box.style.background = rarityColors[info.rarity] || "#fff";
+                            box.innerHTML = `
+                                <img class="cosmetic-img" src="${info.image}" alt="${info.name}">
+                                <span class="cosmetic-name">${info.name}</span>
+                            `;
+                            container.appendChild(box);
+                        } else {
+                            // Falls nicht gefunden, zeige die ID an
+                            const box = document.createElement('div');
+                            box.className = 'cosmetic-box';
+                            box.style.background = "#333";
+                            box.innerHTML = `<span class="cosmetic-name">${id}</span>`;
+                            container.appendChild(box);
+                        }
+                    }
+                }
+
+                await renderCosmetics(featured, "featured");
+                await renderCosmetics(daily, "daily");
+            })
+            .catch(err => {
+                document.getElementById('featured').innerHTML = "<span style='color:white'>Fehler beim Laden der Daten.</span>";
+                document.getElementById('daily').innerHTML = "<span style='color:white'>Fehler beim Laden der Daten.</span>";
+            });
+    </script>
 </body>
 </html>
