@@ -60,5 +60,3 @@ You are allowed to host for others, however please credit me and don't remove my
 6) Run "start.bat", if there is no errors, it should work.
 7) Use something to redirect the Fortnite servers to localhost:8080 (Which could be fiddler, ssl bypass that redirects servers, etc...)
 8) When Fortnite launches and is connected to the backend, enter your email and password (or launch with an exchange code) then press login. It should let you in and everything should be working fine.
-
- https://cdn.discordapp.com/attachments/1368973408297025576/1380193370189856898/image.png?ex=6842fcbe&is=6841ab3e&hm=847d54d29a7eeac9c1452cb088cd1adfab3b39b9e5b9ef97d6ab794e60e72a0b&
