@@ -45,6 +45,9 @@
             margin-bottom: 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             min-width: 260px;
+            position: relative;
+            overflow: hidden;
+            background: var(--rarity-color, #fff);
         }
         .cosmetic-img {
             width: 64px;
@@ -58,6 +61,27 @@
             font-size: 1.2rem;
             color: #fff;
             text-shadow: 1px 1px 4px #000;
+        }
+        /* Animierter Shine-Effekt */
+        .cosmetic-box::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            background: linear-gradient(
+                0deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.25) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            pointer-events: none;
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine {
+            0% { top: -100%; }
+            100% { top: 100%; }
         }
     </style>
 </head>
@@ -84,7 +108,7 @@
             exotic: "#00FFFF"
         };
 
-        fetch('../../Config/catalog_config.json')
+        fetch('/Config/catalog_config.json')
             .then(res => res.json())
             .then(async data => {
                 const featured = [];
@@ -102,41 +126,37 @@
 
                 // Holt Infos von der Fortnite API anhand der Cosmetic-ID
                 async function getCosmeticInfo(id) {
-    const url = `https://fortnite-api.com/v2/cosmetics/br/${encodeURIComponent(id)}?nocache=${Date.now()}`;
-    const response = await fetch(url);
-    const json = await response.json();
-    if (json.status === 200 && json.data) {
-        return {
-            name: json.data.name,
-            rarity: json.data.rarity.value,
-            image: json.data.images.icon
-        };
-    }
-    return null;
-}
+                    const response = await fetch(`https://fortnite-api.com/v2/cosmetics/br/${encodeURIComponent(id)}?nocache=${Date.now()}`);
+                    const json = await response.json();
+                    if (json.status === 200 && json.data) {
+                        return {
+                            name: json.data.name,
+                            rarity: json.data.rarity.value,
+                            image: json.data.images.icon
+                        };
+                    }
+                    return null;
+                }
 
                 // Zeigt Cosmetics an
                 async function renderCosmetics(list, containerId) {
                     const container = document.getElementById(containerId);
                     for (const id of list) {
                         const info = await getCosmeticInfo(id);
+                        const box = document.createElement('div');
+                        box.className = 'cosmetic-box';
+                        // Setze Hintergrundfarbe je nach Seltenheit
                         if (info) {
-                            const box = document.createElement('div');
-                            box.className = 'cosmetic-box';
-                            box.style.background = rarityColors[info.rarity] || "#fff";
+                            box.style.setProperty('--rarity-color', rarityColors[info.rarity] || "#fff");
                             box.innerHTML = `
                                 <img class="cosmetic-img" src="${info.image}" alt="${info.name}">
                                 <span class="cosmetic-name">${info.name}</span>
                             `;
-                            container.appendChild(box);
                         } else {
-                            // Falls nicht gefunden, zeige die ID an
-                            const box = document.createElement('div');
-                            box.className = 'cosmetic-box';
-                            box.style.background = "#333";
+                            box.style.setProperty('--rarity-color', "#fff");
                             box.innerHTML = `<span class="cosmetic-name">${id}</span>`;
-                            container.appendChild(box);
                         }
+                        container.appendChild(box);
                     }
                 }
 

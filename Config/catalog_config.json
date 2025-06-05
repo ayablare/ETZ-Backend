@@ -1,7 +1,7 @@
 {
     "//": "BR Item Shop Config",
     "daily1": {
-        "itemGrants": ["AthenaCharacter:cid_001_athena_commando_f_default"],
+        "itemGrants": ["AthenaCharacter:CID_037_Athena_Commando_F_WinterCamo"],
         "price": 0
     },
     "daily2": {
@@ -9,7 +9,7 @@
         "price": 0
     },
     "daily3": {
-        "itemGrants": ["AthenaCharacter:cid_003_athena_commando_f_default"],
+        "itemGrants": ["AthenaCharacter:CID_038_Athena_Commando_M_Disco"],
         "price": 0
     },
     "daily4": {
@@ -21,15 +21,15 @@
         "price": 0
     },
     "daily6": {
-        "itemGrants": ["AthenaCharacter:cid_006_athena_commando_m_default"],
+        "itemGrants": ["AthenaCharacter:CID_038_Athena_Commando_M_Disco"],
         "price": 0
     },
     "featured1": {
-        "itemGrants": ["AthenaCharacter:CID_037_Athena_Commando_F_WinterCamo"],
+        "itemGrants": ["AthenaDance:EID_Fresh"],
         "price": 0
     },
     "featured2": {
-        "itemGrants": ["AthenaCharacter:cid_008_athena_commando_m_default"],
+        "itemGrants": ["AthenaMusic:MusicPack_011_GetFunky"],
         "price": 0
     }
 }

@@ -1,3 +1,2 @@
 :start
-python -m http.server
-goto start
+node server.js
