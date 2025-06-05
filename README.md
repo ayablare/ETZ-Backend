@@ -60,3 +60,6 @@ You are allowed to host for others, however please credit me and don't remove my
 6) Run "start.bat", if there is no errors, it should work.
 7) Use something to redirect the Fortnite servers to localhost:8080 (Which could be fiddler, ssl bypass that redirects servers, etc...)
 8) When Fortnite launches and is connected to the backend, enter your email and password (or launch with an exchange code) then press login. It should let you in and everything should be working fine.
+
+# How to host the Shop website?
+Go to the **website** then **shop** once in shop run the **start.bat**
